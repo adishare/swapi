@@ -2,15 +2,11 @@ import React from "react"
 import { Switch, withRouter, Route, Redirect } from 'react-router-dom'
 
 import PeoplePage from "./views/PeoplePage"
-// import NotFoundPage from "./views/NotFoundPage"
 import PeopleDetail from "./views/PeopleDetail"
-// import UserProfile from "./views/UserProfile"
 
 const routes = [
     { path: "/people", component: PeoplePage, exact: true },
     { path: "/people/:peopleId", component: PeopleDetail, exact: true },
-    // { path: "/user/:userId", component: UserProfile, exact: false },
-    // { path: "*", component: NotFoundPage, exact: false }
 ]
 
 const PublicRoute = ({ component: Component, ...rest }) => {

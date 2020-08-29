@@ -18,17 +18,21 @@ const CharacterSpeciesAndHomeworld = ({speciesUrl, homeworldUrl}) => {
     const [species, setSpecies] = useState({})
     const [homeworld, setHomeworld] = useState({})
 
-    const getCharacterSpeciesAndHomeworld = async () => {
+    const getCharacterSpecies = async () => {
         Axios.get(speciesUrl).then((response) => {
             setSpecies(response.data)
         })
+    }
+
+    const getCharacterHomeworld = async () => {
         Axios.get(homeworldUrl).then((response) => {
             setHomeworld(response.data)
         })
     }
 
     useEffect(() => {
-        getCharacterSpeciesAndHomeworld()
+        getCharacterSpecies()
+        getCharacterHomeworld()
         return () => {
             setSpecies({})
             setHomeworld({})
@@ -36,9 +40,8 @@ const CharacterSpeciesAndHomeworld = ({speciesUrl, homeworldUrl}) => {
     }, [])
 
     return (
-        <div className="">
-            Species : {species.name || '-'}
-            <br/>
+        <div>
+            Species : {species.name || '-'} <br/>
             Homeworld : {homeworld.name || '-'}
         </div>
     )
@@ -54,16 +57,18 @@ const PeopleDetail = ({ getPeopleByIdRequest, setActivePeopleRequest, activePeop
     }, [getPeopleByIdRequest, match.params.peopleId, setActivePeopleRequest])
 
     if(!activePeople) return (
-        <>
+        <div>
             <Navbar></Navbar>
             <LoadingSpinner/>
             <Footer></Footer>
-        </>
+        </div>
     )
 
     return (
         <div className="view-people-view">
+
             <Navbar></Navbar>
+
             <Container style={{ background: "#29303B" }}>
                 <Container className=" h-100 text-light py-5 px-5">
                     <Row className="my-auto">
@@ -105,9 +110,7 @@ const PeopleDetail = ({ getPeopleByIdRequest, setActivePeopleRequest, activePeop
             <Container className='mt-2'>
                 <Breadcrumb>
                     <Breadcrumb.Item onClick={() => props.history.goBack() } >People</Breadcrumb.Item>
-                    <Breadcrumb.Item active >
-                        { activePeople && activePeople.name}
-                    </Breadcrumb.Item>
+                    <Breadcrumb.Item active > { activePeople && activePeople.name} </Breadcrumb.Item>
                 </Breadcrumb>
             </Container>
 
@@ -121,7 +124,9 @@ const PeopleDetail = ({ getPeopleByIdRequest, setActivePeopleRequest, activePeop
 
                     </Col>
                     <Col lg={4}>
+
                         <CharacterStarship starshipUrlList={activePeople.starships} />
+
                     </Col>
                 </Row>
             </Container>

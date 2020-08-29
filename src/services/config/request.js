@@ -31,7 +31,6 @@ const handleError = err => {
     // throw new Error(err)
 };
 
-
 export const request = axios.create({
     baseURL: API_URL,
     headers : getDefaultHeaders()

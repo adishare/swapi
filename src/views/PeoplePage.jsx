@@ -47,9 +47,11 @@ const PeoplePage = ({ peopleList, isFetching, peopleListCount, getPeopleListRequ
     return (
         <div>
             <Navbar />
+            
             <PageHeader title="People" subtitle="All Starwars Character"></PageHeader>
             
             <Paginator arrayOfPages={arrayOfPages} currentPage={currentPage} goToPage={goToPage} />
+            
             <div className="d-flex">
                 <Container className="my-2 d-flex justify-content-center">
                     <div id="people-list" >
@@ -65,6 +67,7 @@ const PeoplePage = ({ peopleList, isFetching, peopleListCount, getPeopleListRequ
                     </div>
                 </Container>
             </div>
+            
             <Paginator arrayOfPages={arrayOfPages} currentPage={currentPage} goToPage={goToPage} />
             
             <Footer></Footer>
