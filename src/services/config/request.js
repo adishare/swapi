@@ -17,8 +17,7 @@ axios.interceptors.response.use((response) => {
     return Promise.reject(error.message);
 });
 
-const _authorizationHeaders = () => ({
-    // Authorization: store.state.login.authToken ? store.state.login.authToken : "",
+const getDefaultHeaders = () => ({
     "Content-Type": "application/json",
 });
 
@@ -35,12 +34,12 @@ const handleError = err => {
 
 export const request = axios.create({
     baseURL: API_URL,
-    headers : _authorizationHeaders()
+    headers : getDefaultHeaders()
 })
 
 export const getRequest = async (url, query, headers) => {
     try {
-        let defaultHeaders = _authorizationHeaders()
+        let defaultHeaders = getDefaultHeaders()
         const res = await axios.get(API_URL + url, {
             headers: {...headers,...defaultHeaders},
             params: {...query}
@@ -58,7 +57,7 @@ export const getListRequest = async (
     headers,
 ) => {
     try {
-        let defaultHeaders = _authorizationHeaders()
+        let defaultHeaders = getDefaultHeaders()
         const res = await axios.get(API_URL + url, {
             headers: {...headers,...defaultHeaders},
             params: {...query}
